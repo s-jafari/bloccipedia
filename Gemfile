@@ -21,6 +21,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'bootstrap'
 gem 'figaro'
+gem 'devise'
 
 group :development, :test do
   gem 'byebug'
@@ -31,3 +32,5 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'pry-rails'
 end
+
+gem 'bootstrap-sass'
