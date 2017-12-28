@@ -1,17 +1,23 @@
 class WikisController < ApplicationController
+  after_action :verify_authorized
+
   def index
+    authorize Wiki
     @wikis = Wiki.all
   end
 
   def show
+    authorize Wiki
     @wiki = Wiki.find(params[:id])
   end
 
   def new
+    authorize Wiki
     @wiki = Wiki.new
   end
 
   def create
+    authorize Wiki
     @wiki = Wiki.new
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
@@ -27,10 +33,12 @@ class WikisController < ApplicationController
   end
 
   def edit
+    authorize Wiki
     @wiki = Wiki.find(params[:id])
   end
 
   def update
+    authorize Wiki
     @wiki = Wiki.find(params[:id])
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
@@ -45,6 +53,7 @@ class WikisController < ApplicationController
   end
 
   def destroy
+    authorize Wiki
     @wiki = Wiki.find(params[:id])
 
     if @wiki.destroy
