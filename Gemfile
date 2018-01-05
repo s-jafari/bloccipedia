@@ -14,17 +14,6 @@ group :development do
   gem 'listen'
 end
 
-gem 'sass-rails'
-gem 'uglifier'
-gem 'coffee-rails'
-gem 'jquery-rails'
-gem 'turbolinks'
-gem 'bootstrap'
-gem 'figaro'
-gem 'devise'
-gem 'pundit'
-gem 'faker'
-
 group :development, :test do
   gem 'byebug'
   gem 'spring'
@@ -35,4 +24,15 @@ group :development, :test do
   gem 'pry-rails'
 end
 
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
+gem 'jquery-rails'
+gem 'turbolinks'
+gem 'bootstrap'
+gem 'figaro'
+gem 'devise'
+gem 'pundit'
+gem 'stripe'
+gem 'figaro'
 gem 'bootstrap-sass'
