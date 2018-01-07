@@ -1,6 +1,7 @@
 class ChargesController < ApplicationController
   def create
     @amount = 15_00
+    @user = current_user
 
     # Creates a Stripe Customer object, for associating
     # with the charge
@@ -17,7 +18,7 @@ class ChargesController < ApplicationController
       currency: 'usd'
     )
 
-    User.upgrade
+    @user.upgrade
     flash[:notice] = "Thanks for upgrading your account, #{current_user.email}!"
     redirect_to edit_user_registration_path(current_user) # or wherever
 

@@ -11,4 +11,22 @@ class User < ApplicationRecord
   def init
     self.role ||= 0
   end
+
+  def upgrade
+    if self.role == 'standard'
+      update_role('premium')
+    end
+  end
+
+  def downgrade
+    if self.role == 'premium'
+      update_role('standard')
+    end
+  end
+
+  private
+
+  def update_role(new_role)
+    self.update_attribute(:role, new_role)
+  end
 end

@@ -3,24 +3,15 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
-  def upgrade
-    @user = current_user
-    if @user.role == 'standard'
-      @user.role = 'premium'
-    end
-  end
-
   def downgrade
     @user = current_user
-    if @user.role == 'premium'
-      update_role('standard')
+    @user.downgrade
+    if @user.save
+      flash[:notice] = "Your account was downgraded successfully."
+      redirect_to edit_user_registration_path
+    else
+      flash.now[:alert] = "There was an error downgrading your account. Please try again."
+      redirect_to edit_user_registration_path
     end
-  end
-
-  private
-
-  def update_role(new_role)
-    @user = current_user
-    @user.update_attribute(:role, new_role)
   end
 end
