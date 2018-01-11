@@ -1,0 +1,21 @@
+<% if wiki.errors.any? %>
+  <div class="alert alert-danger">
+    <h4><%= pluralize(wiki.errors.count, "error") %>.</h4>
+    <ul>
+      <% wiki.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="form-group">
+  <%= form_for wiki do |f| %>
+    <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki title"%><br />
+    <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki body"%><br />
+    <% if current_user.admin? || current_user.premium? %>
+      <%= f.check_box :private %> Private wiki
+    <% end %>
+    <%= f.submit "Save", class: 'btn btn-success' %>
+  <% end %>
+</div>

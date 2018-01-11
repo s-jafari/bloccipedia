@@ -7,6 +7,9 @@ class User < ApplicationRecord
   enum role: [:standard, :admin, :premium]
 
   after_initialize :init
+  after_update :private_to_public
+
+  has_many :wikis
 
   def init
     self.role ||= 0
@@ -28,5 +31,10 @@ class User < ApplicationRecord
 
   def update_role(new_role)
     self.update_attribute(:role, new_role)
+  end
+
+  def private_to_public
+    return unless role_changed?(from: 'premium', to: 'standard')
+    wikis.update_all private: false
   end
 end
