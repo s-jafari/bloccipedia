@@ -1,0 +1,11 @@
+<%= form_tag(collaborators_path, method: 'post') do %>
+  <%= text_field_tag :email, nil, class: 'form-control', placeholder: "Add collaborators"%><br>
+  <%= hidden_field_tag :wiki_id, @wiki.id%><br>
+  <%= submit_tag "Save collaborators", class: 'btn btn-success' %>
+<% end %>
+
+
+<% @wiki.collaborators.each do |collaborator| %>
+  <%= (User.find_by id: collaborator.user_id).email %>
+  <%= button_to "Remove", collaborator_path, method: :delete, params: {:user_id => collaborator.user_id}, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to remove this collaborator?' } %>
+<% end %>

@@ -10,6 +10,7 @@ class User < ApplicationRecord
   after_update :private_to_public
 
   has_many :wikis
+  has_many :collaborators
 
   def init
     self.role ||= 0
