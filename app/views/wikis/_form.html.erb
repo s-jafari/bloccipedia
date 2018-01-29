@@ -14,7 +14,7 @@
     <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki title"%><br />
     <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki body"%><br />
     <p>*italic*  **bold**  _underline_  ~~strikethrough~~</p>
-    <% if current_user.admin? || current_user.premium? %>
+    <% if current_user.admin? || (current_user.premium? && wiki.user == current_user) %>
       <%= f.check_box :private %> Private wiki
     <% end %>
     <%= f.submit "Save", class: 'btn btn-success' %>

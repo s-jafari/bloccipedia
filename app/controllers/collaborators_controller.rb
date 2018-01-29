@@ -1,10 +1,7 @@
 class CollaboratorsController < ApplicationController
   def create
     @wiki = Wiki.find_by id: params[:wiki_id]
-    if @wiki.collaborators.any? {|collab| collab.user_id == (User.find_by email: params[:email]).id}
-      flash[:alert] = "The collaborator already exists. Please try again."
-      redirect_to edit_wiki_path(@wiki.id)
-    elsif !User.find_by email: params[:email]
+    if !User.find_by email: params[:email]
       flash[:alert] = "This user does not exist. Please enter a valid email address."
       redirect_to edit_wiki_path(@wiki.id)
     else

@@ -4,15 +4,15 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def update?
-    user.present?
+    !record.private? ||user.admin? || record.user == user || record.collaborators.any? {|collab| collab.user_id == user.id}
   end
 
   def create?
-    update?
+    user.present?
   end
 
   def destroy?
-    user.present?
+    user.admin? || record.user == user
   end
 
   def index?
